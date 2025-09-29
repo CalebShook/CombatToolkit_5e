@@ -8,5 +8,23 @@
         Title="MainWindow" Height="450" Width="800">
     <Grid>
 
+        <Grid.RowDefinitions>
+
+            <RowDefinition Height=".75*"/>
+            <RowDefinition Height=".25*"/>
+
+        </Grid.RowDefinitions>
+
+        <TextBlock x:Name="InitiativeTextBlock" VerticalAlignment="Center" HorizontalAlignment="Center" Width="400" Height="250" FontSize="20"/>
+        <StackPanel Grid.Row ="1" Orientation="Horizontal" HorizontalAlignment="Center">
+
+            <Label Content="Name:" VerticalAlignment="Center" FontSize="25"/>
+            <TextBox x:Name="NameTextBox" FontSize="20" VerticalContentAlignment="Center" Height="40" Width="250" Margin="20"/>
+            <Label Content="Initiative:" VerticalAlignment="Center" FontSize="25"/>
+            <TextBox x:Name="InitiativeTextBox" FontSize="20" VerticalContentAlignment="Center" Height="40" Width="75" Margin="20"/>
+            <Button x:Name="AddCombatantButton" Content=" Add Combatant " Height="40" Margin="20" FontSize="20" Click="AddCombatantButton_Click"/>
+
+        </StackPanel>
+
     </Grid>
 </Window>
