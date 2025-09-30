@@ -5,26 +5,33 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CombatToolkit_5e"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="500" Width="850">
+    
     <Grid>
 
         <Grid.RowDefinitions>
-
-            <RowDefinition Height=".75*"/>
-            <RowDefinition Height=".25*"/>
-
+            <RowDefinition Height=".65*"/>
+            <RowDefinition Height=".20*"/>
+            <RowDefinition Height=".15*"/>
         </Grid.RowDefinitions>
 
-        <TextBlock x:Name="InitiativeTextBlock" VerticalAlignment="Center" HorizontalAlignment="Center" Width="400" Height="250" FontSize="20"/>
+        <ListView x:Name="InitiativeListView" VerticalAlignment="Center" HorizontalAlignment="Center" Width="400" Height="250" FontSize="20" ItemsSource="{Binding Combatants}"/>
         <StackPanel Grid.Row ="1" Orientation="Horizontal" HorizontalAlignment="Center">
-
             <Label Content="Name:" VerticalAlignment="Center" FontSize="25"/>
             <TextBox x:Name="NameTextBox" FontSize="20" VerticalContentAlignment="Center" Height="40" Width="250" Margin="20"/>
             <Label Content="Initiative:" VerticalAlignment="Center" FontSize="25"/>
             <TextBox x:Name="InitiativeTextBox" FontSize="20" VerticalContentAlignment="Center" Height="40" Width="75" Margin="20"/>
-            <Button x:Name="AddCombatantButton" Content=" Add Combatant " Height="40" Margin="20" FontSize="20" Click="AddCombatantButton_Click"/>
+            <Grid>
+                
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
 
+                <Button x:Name="AddCombatantButton" Content=" Add Combatant " Margin="5" FontSize="20" Click="AddCombatantButton_Click"/>
+                <Button x:Name="RemoveCombatantButton" Grid.Row="1" Content=" Remove Combatant " Margin="5" FontSize="20" Click="RemoveCombatantButton_Click"/>
+            </Grid>
         </StackPanel>
-
+        <Label x:Name="errorLabel" Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="20" Foreground="Red"/>
     </Grid>
 </Window>
