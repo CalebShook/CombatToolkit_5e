@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:CombatToolkit_5e"
+        xmlns:local="clr-namespace:CombatToolkit_5e" xmlns:viewmodel="clr-namespace:CombatToolkit_5e.ViewModel" d:DataContext="{d:DesignInstance Type=viewmodel:MainWindowViewModel}"
         mc:Ignorable="d"
         Title="MainWindow" Height="500" Width="850">
     
@@ -11,16 +11,23 @@
 
         <Grid.RowDefinitions>
             <RowDefinition Height=".65*"/>
-            <RowDefinition Height=".20*"/>
-            <RowDefinition Height=".15*"/>
+            <RowDefinition Height=".25*"/>
+            <RowDefinition Height=".10*"/>
         </Grid.RowDefinitions>
 
-        <ListView x:Name="InitiativeListView" VerticalAlignment="Center" HorizontalAlignment="Center" Width="400" Height="250" FontSize="20" ItemsSource="{Binding Combatants}"/>
+        <ListView x:Name="InitiativeListView" VerticalAlignment="Center" HorizontalAlignment="Center" Width="400" Height="250" FontSize="20" ItemsSource="{Binding Combatants}" SelectedItem="{Binding SelectedCombatant}">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Name}" Width="275"/>
+                    <GridViewColumn Header="Initiative" DisplayMemberBinding="{Binding Initiative}" Width="125"/>
+                </GridView>
+            </ListView.View>
+        </ListView>
         <StackPanel Grid.Row ="1" Orientation="Horizontal" HorizontalAlignment="Center">
             <Label Content="Name:" VerticalAlignment="Center" FontSize="25"/>
-            <TextBox x:Name="NameTextBox" FontSize="20" VerticalContentAlignment="Center" Height="40" Width="250" Margin="20"/>
+            <TextBox x:Name="NameTextBox" Text="{Binding Name}" FontSize="20" VerticalContentAlignment="Center" Height="40" Width="250" Margin="20"/>
             <Label Content="Initiative:" VerticalAlignment="Center" FontSize="25"/>
-            <TextBox x:Name="InitiativeTextBox" FontSize="20" VerticalContentAlignment="Center" Height="40" Width="75" Margin="20"/>
+            <TextBox x:Name="InitiativeTextBox" Text="{Binding Initiative}" FontSize="20" VerticalContentAlignment="Center" Height="40" Width="75" Margin="20"/>
             <Grid>
                 
                 <Grid.RowDefinitions>
@@ -28,8 +35,8 @@
                     <RowDefinition/>
                 </Grid.RowDefinitions>
 
-                <Button x:Name="AddCombatantButton" Content=" Add Combatant " Margin="5" FontSize="20" Click="AddCombatantButton_Click"/>
-                <Button x:Name="RemoveCombatantButton" Grid.Row="1" Content=" Remove Combatant " Margin="5" FontSize="20" Click="RemoveCombatantButton_Click"/>
+                <Button x:Name="AddCombatantButton" Content=" Add Combatant " Margin="5" FontSize="20" Command="{Binding AddCommand}"/>
+                <Button x:Name="RemoveCombatantButton" Grid.Row="1" Content=" Remove Combatant " Margin="5" FontSize="20" Command="{Binding RemoveCommand}"/>
             </Grid>
         </StackPanel>
         <Label x:Name="errorLabel" Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="20" Foreground="Red"/>

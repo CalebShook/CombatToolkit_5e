@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CombatToolkit_5e
+namespace CombatToolkit_5e.Model
 {
     public class Combatant
     {
