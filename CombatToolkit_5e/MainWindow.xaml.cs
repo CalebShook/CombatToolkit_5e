@@ -19,9 +19,6 @@ namespace CombatToolkit_5e
     /// TODO Implement custom controls (kinda like fragments in android studio)
     /// TODO resolve initiative disputes (possibly through pop up menu)
     /// TODO create "in combat" mode
-    /// TODO add clear button
-    /// TODO add error checking
-    /// TODO get rid of the 0 in the InitiativeTextBox
     public partial class MainWindow : Window
     {
 
@@ -30,7 +27,12 @@ namespace CombatToolkit_5e
             InitializeComponent();
             MainWindowViewModel viewModel = new();
             DataContext = viewModel;
+            NameTextBox.Focus();
         }
 
+        private void AddCombatantButton_Click(object sender, RoutedEventArgs e)
+        {
+            NameTextBox.Focus();
+        }
     }
 }

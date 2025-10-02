@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CombatToolkit_5e" xmlns:viewmodel="clr-namespace:CombatToolkit_5e.ViewModel" d:DataContext="{d:DesignInstance Type=viewmodel:MainWindowViewModel}"
         mc:Ignorable="d"
-        Title="MainWindow" Height="500" Width="850">
+        Title="MainWindow" Height="500" Width="900">
     
     <Grid>
 
@@ -15,30 +15,49 @@
             <RowDefinition Height=".10*"/>
         </Grid.RowDefinitions>
 
-        <ListView x:Name="InitiativeListView" VerticalAlignment="Center" HorizontalAlignment="Center" Width="400" Height="250" FontSize="20" ItemsSource="{Binding Combatants}" SelectedItem="{Binding SelectedCombatant}">
-            <ListView.View>
-                <GridView>
-                    <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Name}" Width="275"/>
-                    <GridViewColumn Header="Initiative" DisplayMemberBinding="{Binding Initiative}" Width="125"/>
-                </GridView>
-            </ListView.View>
-        </ListView>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width=".25*"/>
+                <ColumnDefinition Width=".5*"/>
+                <ColumnDefinition Width=".25*"/>
+            </Grid.ColumnDefinitions>
+
+            <Label Content="Combat Options" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="20" FontSize="18"/>
+            <StackPanel Orientation="Vertical" Margin="25,75,25,25" Grid.Column="0">
+                <CheckBox Content="Lair Actions" IsChecked="{Binding LairActions, Mode=TwoWay}" FontSize="10" HorizontalAlignment="Center" Margin="10">
+                    <CheckBox.LayoutTransform>
+                        <ScaleTransform ScaleX="1.5" ScaleY="1.5"/>
+                    </CheckBox.LayoutTransform>
+                </CheckBox>
+                
+            </StackPanel>
+
+            <ListView x:Name="InitiativeListView" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center" Width="400" Height="250" FontSize="20" ItemsSource="{Binding Combatants}" SelectedItem="{Binding SelectedCombatant}">
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Name}" Width="270"/>
+                        <GridViewColumn Header="Initiative" DisplayMemberBinding="{Binding Initiative}" Width="125"/>
+                    </GridView>
+                </ListView.View>
+            </ListView>
+
+            <StackPanel Orientation="Vertical" Grid.Column="2">
+                <Button x:Name="StartCombatButton" Content=" Start Combat " Margin="15,50,15,0" FontSize="30" Command="{Binding StartCombat}"/>
+                <Button x:Name="RemoveCombatantButton" Content=" Remove Combatant " Margin="15,100,15,20" FontSize="20" Command="{Binding RemoveCommand}"/>
+                <Button x:Name="ClearButton" Content=" Remove All " Margin="15,0,15,0" FontSize="20" Command="{Binding ClearCommand}"/>
+            </StackPanel>
+
+        </Grid>
+
+        
         <StackPanel Grid.Row ="1" Orientation="Horizontal" HorizontalAlignment="Center">
             <Label Content="Name:" VerticalAlignment="Center" FontSize="25"/>
-            <TextBox x:Name="NameTextBox" Text="{Binding Name}" FontSize="20" VerticalContentAlignment="Center" Height="40" Width="250" Margin="20"/>
+            <TextBox x:Name="NameTextBox" Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" FontSize="20" VerticalContentAlignment="Center" Height="40" Width="250" Margin="20"/>
             <Label Content="Initiative:" VerticalAlignment="Center" FontSize="25"/>
             <TextBox x:Name="InitiativeTextBox" Text="{Binding Initiative}" FontSize="20" VerticalContentAlignment="Center" Height="40" Width="75" Margin="20"/>
-            <Grid>
-                
-                <Grid.RowDefinitions>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                </Grid.RowDefinitions>
-
-                <Button x:Name="AddCombatantButton" Content=" Add Combatant " Margin="5" FontSize="20" Command="{Binding AddCommand}"/>
-                <Button x:Name="RemoveCombatantButton" Grid.Row="1" Content=" Remove Combatant " Margin="5" FontSize="20" Command="{Binding RemoveCommand}"/>
-            </Grid>
+            <Button x:Name="AddCombatantButton" Content=" Add Combatant " Margin="5,40,5,40" FontSize="20" Command="{Binding AddCommand}" Click="AddCombatantButton_Click"/>
+            
         </StackPanel>
-        <Label x:Name="errorLabel" Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="20" Foreground="Red"/>
+        <Label x:Name="errorLabel" Content="{Binding ErrorLabel}" Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="20" Foreground="Red"/>
     </Grid>
 </Window>
